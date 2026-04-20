@@ -1,0 +1,20 @@
+{
+  "name": "mfalme-arena",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace=backend\" \"npm run dev --workspace=frontend\"",
+    "dev:backend": "npm run dev --workspace=backend",
+    "dev:frontend": "npm run dev --workspace=frontend",
+    "migrate": "npm run migrate --workspace=backend",
+    "riot:provider": "node backend/scripts/riot-setup.js provider",
+    "riot:tournament": "node backend/scripts/riot-setup.js tournament"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
