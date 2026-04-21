@@ -62,7 +62,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           embeddedWallets: {
             createOnLogin: 'users-without-wallets',
           },
-          supportedChains: [],
         }}
       >
         <BrowserRouter>
