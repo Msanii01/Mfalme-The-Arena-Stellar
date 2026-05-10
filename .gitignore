@@ -65,3 +65,8 @@ coverage/
 .tmp/
 *.tmp
 .cache/
+
+# --- Stellar CLI binary (downloaded, not source) ---
+stellar.exe
+stellar.tar.gz
+stellar.zip

@@ -173,13 +173,18 @@ export const ugtPrizePool = {
     let account = await server.getAccount(hostAddress);
     const contract = new Contract(UGT_PRIZE_POOL_ID);
     
-    // distribution: JSON/Map -> ScVal
-    // For MVP, we'll pass it as a string or handle conversion
+    // distribution: { "1": 60, "2": 30, "3": 10 } -> scaled to basis points (6000, 3000, 1000)
+    // We convert it to a Map that Soroban SDK understands
+    const scaledDistribution = new Map();
+    for (const [rank, percent] of Object.entries(distribution)) {
+      scaledDistribution.set(Number(rank), BigInt(percent) * 100n);
+    }
+
     const op = contract.call('deposit_prize_pool', ...[
       tournamentId,
       hostAddress,
       BigInt(amountUsdc),
-      JSON.stringify(distribution) 
+      scaledDistribution
     ]);
     
     const tx = new TransactionBuilder(account, {
